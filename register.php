@@ -2,15 +2,19 @@
 <!-- 
 Ronald Mercado H.
 Web Server Applications
-11 March 2023
+21 March 2023
 LaSalle College
 Web Server Project - Registration Form
 -->
 
 <?php
+require_once "functions.php";
+require_once "registerController.php";
 
-require_once "process.php";
-
+if (isset($_SESSION['mensaje'])) {
+    echo "<div class='mensaje'>" . $_SESSION['mensaje'] . "</div>";
+    unset($_SESSION['mensaje']);
+}
 ?>
 
 <!-- -->
@@ -20,17 +24,20 @@ require_once "process.php";
 <head>
     <meta charset="UTF-8">
     <title>Sign Up</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">    
     <style>
         body{ font: 14px sans-serif; }
         .wrapper{ width: 360px; padding: 20px; }
     </style>
 </head>
+
 <body>
+<!--<?php require_once "navBar.php"; ?></br></br></br> -->
     <div class="wrapper">
         <h2>Sign Up</h2>
         <p>Please fill this form to create an account.</p>
-        <form action="process.php" method="post">
+        
+        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post"; >
 
             <div class="form-group">
                 <label>Username</label>
@@ -63,10 +70,11 @@ require_once "process.php";
             </div>
 
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Create">                
+                <input type="submit" class="btn btn-primary" value="Create" name = "send">                
             </div>
             <p>Already have an account? <a href="">Login here</a>.</p>
         </form>
-    </div>    
+    </div>
+    <?php require_once "footer.php";?>
 </body>
 </html>
