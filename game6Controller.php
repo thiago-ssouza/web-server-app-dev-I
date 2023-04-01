@@ -18,7 +18,7 @@ $dbMain = new ManipulateDB();
 
 $playerWon = FALSE;
 $submitPressed = FALSE;
-$gameLevel = 4;
+$gameLevel = 6;
 getInstructions();
 
 checkPlayerCanAccessLevelOrRedirectPlayer();
@@ -35,9 +35,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         if($_SESSION['livesUsed'] > TOTAL_LIVES) {
             $_SESSION['result'] = 'failure';
         }
-
         setData($dbMain);
-
         $dbMain->insertScore();
         
         session_destroy();
@@ -79,7 +77,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $answer = strtolower(trim($_POST['answer']));
         $gameNumLetterString = $_POST['game_num_letters'];
         $gameNumLetterArr = explode(',', $gameNumLetterString);
-
         if(validateEntryAnswer()) {
 
             validateCorrectAnswer();
@@ -92,13 +89,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 if(!(in_array($gameLevel, $_SESSION['gainedLevels'], true))) {
                     
                     array_push($_SESSION['gainedLevels'], $gameLevel);
+
+                    if(count($_SESSION['gainedLevels']) == TOTAL_LEVELS){
+                        
+                        $_SESSION['result'] = 'success';
+
+                        setData($dbMain);
+
+                        $resultLevelMsg = $resultLevelMsg . '<br/><br/>Congratulations!! You have won all the ' . TOTAL_LEVELS . ' levels!';
+
+                        $dbMain->insertScore();
+                    }
                 }
             }else {
-
                 if(!(in_array($gameLevel, $_SESSION['gainedLevels'], true))) {
                     if($_SESSION['livesUsed'] >= TOTAL_LIVES) {
                         $_SESSION['result'] = 'failure';
-
                         setData($dbMain);
 
                         $resultLevelMsg = $resultLevelMsg . '<br/><br/>Well Played. Try again later!! You have used all the ' . TOTAL_LIVES . ' lives!';
@@ -106,9 +112,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                         $dbMain->insertScore();
 
                     }
-
                     $_SESSION['livesUsed'] = $_SESSION['livesUsed'] + 1;
-
                 }
 
             }

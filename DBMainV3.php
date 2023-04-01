@@ -81,9 +81,9 @@ class ManipulateDB
         )CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci; 
         
         CREATE VIEW history AS
-            SELECT s.scoreTime, p.id, p.fName, p.lName, s.result, s.livesUsed 
-            FROM player p, score s
-            WHERE p.registrationOrder = s.registrationOrder;
+        SELECT s.scoreTime, p.id, p.fName, p.lName, s.result, s.livesUsed 
+        FROM player p, score s
+        WHERE p.registrationOrder = s.registrationOrder;
         ";
 
         $sqlCode['selectTab'] = "SELECT * FROM player;";
@@ -130,7 +130,9 @@ class ManipulateDB
         VALUES (?, ?, ?, now())";
         // added (ronald)
         $sqlCode['insertPassword'] = "INSERT INTO authenticator(passCode,registrationOrder)
-        VALUES(?, ?)";            
+        VALUES(?, ?)";
+        // added (ronald)
+        $sqlCode['history'] = "SELECT scoreTime, id, fName, lName, result, livesUsed FROM mi_vista";
 
         $sqlCode['changePassword']="UPDATE authenticator SET passCode = $this->newPassword where registrationOrder= $this->registrationOrder";
             
@@ -505,8 +507,8 @@ class ManipulateDB
                                 die($this->messages()['error']['insertTab']);
                             }
                             else{
-                                echo "Redirecting to login page";
-                                header("Refresh:10 ;location: login.php");
+                                header("location: login.php");
+                                exit();
                             }
 
 

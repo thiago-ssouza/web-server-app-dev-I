@@ -1,27 +1,29 @@
 <?php
 
 echo <<<_NAVBAR
-<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-dark bg-dark fixed-top navbar-toggler">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+<header class="header"><p>Final project for Web developement by Anh Khoi Nguyen, Thiago Soares De Souza and Ronald Mauricio Mercado Herrera</p>
+<nav class="navbar">
+        <div class="navbar__container">
+            <a href="#home" id="navbar__logo">Final Project</a>
+        
+            <ul class="navbar__menu">
+                <li class="navbar__item">
+                    <a href="index.php" class="navbar__links" id="home-page">Home</a>
+                </li>
+                <li class="navbar__item">
+                    <a href="viewHistory.php" class="navbar__links" id="History-page">History</a>
+                </li>
+                <li class="navbar__item">
+                    <a href="login.php" class="navbar__links" id="login-page">Login</a>
+                </li>
+                <li class="navbar__btn">
+                    <a href="register.php" class="button" id="sign-up">Sign Up</a>
+                </li>
+            </ul>
+
+        </div>
+    </nav> 
+    </header>
 _NAVBAR;
 ?>
+

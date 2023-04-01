@@ -90,8 +90,10 @@ $username = $password = $confirm_password = $firstname = $lastname =  "";
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     // validations
     $userName = usernameValidation($_POST['username']);   
-    $password = passwordValidation($_POST['password']);    
-    $confirm_password = confirmPasswordValidation($_POST['password'], $_POST['confirm_password']);    
+    $password = passwordValidation($_POST['password']);
+    $password = password_hash($password, PASSWORD_DEFAULT);  
+    $confirm_password = confirmPasswordValidation($_POST['password'], $_POST['confirm_password']);
+    $confirm_password = password_hash($confirm_password, PASSWORD_DEFAULT);   
     $firstname = firstnameValidation($_POST['firstname']);    
     $lastname = lastnameValidation($_POST['lastname']);
     $errorValidation = errorValidation();

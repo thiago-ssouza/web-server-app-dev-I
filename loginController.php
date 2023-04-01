@@ -7,8 +7,14 @@ require_once "functions.php";
 session_start();
 
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-    header("location: game1.php");
+    if(!(in_array(TOTAL_LEVELS, $_SESSION['gainedLevels']))){
+        header("location: game" . ( ($_SESSION['gainedLevels'][count($_SESSION['gainedLevels'])-1]) + 1) . ".php");
+    } else{
+        header("location: game" . ( ($_SESSION['gainedLevels'][count($_SESSION['gainedLevels'])-1])) . ".php");
+    }
     exit;
+    // header("location: game1.php");
+    // exit;
 }
 
 $username_placeholder = "Enter your username";
