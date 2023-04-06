@@ -537,3 +537,43 @@ body {
   color:#fff;
   text-decoration: none;
 }
+
+
+
+/*history page Table styles*/
+
+.tabla-score {  
+  border-collapse: collapse;
+  width: 100%;
+  background-color:#000;
+  text-decoration: dashed;
+  color:#f2f2f2
+  
+}
+
+.tabla-score th, .tabla-score td {
+  text-align: center;
+  padding: 15px;
+  
+}
+
+.tabla-score th {  
+  background-color: #ff1ead;
+  color: white;
+  
+}
+
+.tabla-score tr:nth-child(even) {
+  background-color: #101010;  
+  
+}
+
+.tabla-score tr:hover {
+  background-color:#000;
+  color: #da22ff;
+}
+
+.tabla-score td:first-child {
+  font-weight: bold;  
+}
+

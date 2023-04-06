@@ -23,8 +23,9 @@ require "game5Controller.php";
     <div class="content p-5">
         <article class="content__container is-invalid">
         <h2 class="content__heading is-valid"> <span>Game Level <?php echo $gameLevel . ":"; ?></span>: <?php echo $instructions; ?></h2>
-        <h5 class="content__desc">Player: <?php echo (isset($_SESSION['loggedin'])) ? $_SESSION['fName'] . " " . $_SESSION['lName'] . " | Current Live: " : "" ;?> <?php echo (isset($_SESSION['loggedin']) && $_SESSION['livesUsed'] <= TOTAL_LIVES) ? $_SESSION['livesUsed'] : ($_SESSION['livesUsed'] - 1) ;?></h5>
-        <span class="valid-feedback"><?php echo (isset($_SESSION['loggedin']) && (in_array(($gameLevel), $_SESSION['gainedLevels'], true))) ? 'You Have Already Won This Level (Any mistake will not increase the used lives)' : '';?></span>
+        <!--<h5 class="content__desc">Player: <?php //echo (isset($_SESSION['loggedin'])) ? $_SESSION['fName'] . " " . $_SESSION['lName'] . " | Current Live: " : "" ;?> <?php //echo (isset($_SESSION['loggedin']) && $_SESSION['livesUsed'] <= TOTAL_LIVES) ? (7 - $_SESSION['livesUsed']) : (7 - $_SESSION['livesUsed']) ;?></h5>-->
+        <h5 class="content__desc">Player: <?php echo (isset($_SESSION['loggedin'])) ? $_SESSION['fName'] . " " . $_SESSION['lName'] . " | Current Lives: " . ((TOTAL_LIVES + 1) - $_SESSION['livesUsed']) : "" ;?></h5>
+        <span class="valid-feedback"><?php echo (isset($_SESSION['loggedin']) && (in_array(($gameLevel), $_SESSION['gainedLevels'], true))) ? 'You Have Already Won This Level (Any mistake will not decrease the number of lives)' : '';?></span>
         <p class="content__desc"">Please <?php echo $instructions; ?> (from a to z).</p>
         <p class="content__desc">** put ',' between the letters (Example: a,b,c,d,e).</p>
         <p class="content__desc">** put the first letter before the latter letter (Example: a,z).</p>

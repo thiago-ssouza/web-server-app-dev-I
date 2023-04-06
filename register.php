@@ -11,10 +11,7 @@ Web Server Project - Registration Form
 require_once "functions.php";
 require_once "registerController.php";
 
-if (isset($_SESSION['mensaje'])) {
-    echo '<div class="alert alert-danger">' . $_SESSION['mensaje'] . "</div>";
-    unset($_SESSION['mensaje']);
-}
+
 ?>
 
 <!-- -->
@@ -36,6 +33,12 @@ if (isset($_SESSION['mensaje'])) {
 <?php require_once "navBar.php"; ?>
     <div class="content p-5">
         <h2 class="content__heading">Sign Up</h2>
+        <?php
+        if (isset($_SESSION['mensaje'])) {
+            echo '<div class="alert alert-danger">' . $_SESSION['mensaje'] . "</div>";
+            unset($_SESSION['mensaje']);
+        }
+        ?>
         <p  class="content__desc"> Please fill this form to create an account.</p>
         
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post"; >

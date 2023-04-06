@@ -8,7 +8,7 @@ define('DBNAME','kidsGames');
 class ManipulateDB
 {   
     //Declare the properties
-    public $firstname, $lastname, $username, $registrationOrder,$newPassword, $password, $login_err, $scoreTime, $result, $livesUsed;
+    public $firstname, $lastname, $username, $registrationOrder,$newPassword, $password, $login_err, $scoreTime, $result, $livesUsed, $passModMsg;
     
     // Changed to protected to get acces from register class >> before was private $connection;
     protected $connection; 
@@ -132,9 +132,9 @@ class ManipulateDB
         $sqlCode['insertPassword'] = "INSERT INTO authenticator(passCode,registrationOrder)
         VALUES(?, ?)";
         // added (ronald)
-        $sqlCode['history'] = "SELECT scoreTime, id, fName, lName, result, livesUsed FROM mi_vista";
+        $sqlCode['history'] = "SELECT scoreTime, id, fName, lName, result, livesUsed FROM history";
 
-        $sqlCode['changePassword']="UPDATE authenticator SET passCode = $this->newPassword where registrationOrder= $this->registrationOrder";
+        $sqlCode['changePassword']="UPDATE authenticator SET passCode = '$this->newPassword' where registrationOrder= $this->registrationOrder";
             
         $sqlCode['checkPasswordExists']="SELECT passCode FROM authenticator where registrationOrder= $this->registrationOrder";
 
@@ -490,7 +490,7 @@ class ManipulateDB
             //2-Connect to the DB
             if ($this->connectToDB() === TRUE) {
                 
-                if(validateNoError()){
+                if(validatePasswordModify()){
                         
                     if ($this->executeSql($this->sqlCode()['userNameExist']) === TRUE) {
                         
@@ -503,22 +503,22 @@ class ManipulateDB
                             $this->registrationOrder = $each_row['registrationOrder'];
 
                             if ($this->executeSql($this->sqlCode()['changePassword']) === false){
-                                echo $this->messages()['link']['tryAgain'];
-                                die($this->messages()['error']['insertTab']);
+                                $this->passModMsg= $this->messages()['link']['tryAgain'];
+                               
                             }
                             else{
-                                header("location: login.php");
-                                exit();
+                                $this->passModMsg= "Password modified successfully";
+
                             }
 
 
                         } else{
-                            die($this->messages()['error']['userNotExist']);
+                            $this->passModMsg=$this->messages()['error']['userNotExist'];
                         }
                     }
                     //Cannot Select data From the Table
                     else{
-                        die($this->messages()['error']['userNotExist']);
+                        $this->passModMsg=$this->messages()['error']['userNotExist'];
                     }
                 }
                 //if error - already shown
@@ -527,12 +527,12 @@ class ManipulateDB
             }
             //Cannot Connect to the DB
             else {
-                die($this->messages()['error']['db']);
+                $this->passModMsg=$this->messages()['error']['db'];
             }        
     }
     //Cannot Connect to the DBMS
     else {
-        die($this->messages()['error']['dbms']);
+        $this->passModMsg=$this->messages()['error']['dbms'];
     }
     }
 

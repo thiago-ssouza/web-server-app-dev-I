@@ -24,12 +24,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $username = usernameValidation($username);   
     $password = passwordValidation($password);    
     $confirm_password = confirmPasswordValidation($password, $confirm_password);    
-    $errorValidation = errorValidation();
+    $errorValidation = validatePasswordModify();
 
     if($errorValidation){
         $dbMain = new ManipulateDB();
         $dbMain->username = $username;
-        $dbMain->newPassword = password_hash($password, PASSWORD_DEFAULT);
+        $dbMain->newPassword = password_hash($confirm_password, PASSWORD_DEFAULT);
         //$dbMain->newPassword = $password;
         $dbMain->changePassword();
     }

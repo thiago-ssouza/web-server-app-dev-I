@@ -505,4 +505,45 @@ function checkPlayerCanAccessLevelOrRedirectPlayer() {
 }
 
 
+function getHistory(){
+
+    if($this->connectToDBMS() === TRUE){
+        if ($this->connectToDB() === TRUE){
+            
+            if ($this->executeSql($this->sqlCode()['history'])){
+                
+                if($this->sqlExec == null && $this->sqlExec->num_rows < 1){
+                    
+                    $_SESSION['mensaje'] = "There are not players yet in the history game";                    
+                
+                } else{
+
+                    $stmt = $this->connection->prepare($this->sqlCode()['history']);
+
+                    echo "<table>";
+
+                        echo "<tr><th>scoreTime</th><th>id</th><th>fName</th><th>lName</th><th>result</th><th>livesUsed</th></tr>";
+
+                        while($fila = mysqli_fetch_assoc($stmt)) {
+                            echo "<tr><td>" . $fila["scoreTime"] . "</td><td>" . $fila["id"] . "</td><td>" . $fila["fName"] . "</td><td>" . $fila["lName"] . "</td><td>" . $fila["result"] . "</td><td>" . $fila["livesUsed"] . "</td></tr>";
+                        }
+                        
+                    echo "</table>";
+                }
+            }else{
+                die($this->messages()['link']['tryAgain']);
+                $_SESSION['mensaje'] = "there was an error, try again"; 
+            }
+        }else{
+            die($this->messages()['link']['tryAgain']);
+            $_SESSION['mensaje'] = "there was an error with the connection, try again";  
+        }
+    }else{
+        die($this->messages()['link']['tryAgain']);
+        $_SESSION['mensaje'] = "there was an error with the connection, try again"; 
+    }
+}
+
+
+
 ?>

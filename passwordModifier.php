@@ -25,8 +25,16 @@ require_once "passwordModPost.php";
 
         <h2 class="content__heading">Password Modifier</h2>
         <p  class="content__desc">Please fill in this form to modify your account.</p>
-        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
 
+
+        <?php 
+        if(!empty($dbMain->passModMsg)){
+            echo '<div class="alert alert-danger">' . $dbMain->passModMsg . '</div>';
+        }        
+        ?>
+
+        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+ 
             <div class="form-group">
                 <label class="content__desc">Username</label>
                 <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>">

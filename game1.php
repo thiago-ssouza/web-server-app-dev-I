@@ -8,6 +8,11 @@ Web Server Project - Game Level 1
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+        require_once "gameControllerL12.php";        
+        //require_once "functions.php";
+?>
+
 <head>
     <meta charset="UTF-8">
     <title>Game Leve <?php echo $gameLevel; ?></title>
@@ -20,18 +25,19 @@ Web Server Project - Game Level 1
 
 <body>
     
-    <?php
-        require_once "gameControllerL12.php";        
+    <!--<?php
+        //require_once "gameControllerL12.php";        
         //require_once "functions.php";
-    ?>
+    ?>-->
 
     <?php require_once "navBar.php";?>
     
     <div class="content p-5">
     <article class="content__container">
         <h2 class="content__heading is-valid"><span>Game Level <?php echo $gameLevel . ":"; ?></span> <?php echo $instructions; ?></h2>
-        <h5 class="content__desc">Player: <?php echo (isset($_SESSION['loggedin'])) ? $_SESSION['fName'] . " " . $_SESSION['lName'] . " | Current Live: " : "" ;?> <?php echo (isset($_SESSION['loggedin']) && $_SESSION['livesUsed'] <= TOTAL_LIVES) ? $_SESSION['livesUsed'] : ($_SESSION['livesUsed'] - 1) ;?></h5>
-        <span class="valid-feedback"><?php echo (isset($_SESSION['loggedin']) && (in_array(($gameLevel), $_SESSION['gainedLevels'], true))) ? 'You Have Already Won This Level (Any mistake will not increase the used lives)' : '';?></span>
+        <!--<h5 class="content__desc">Player: <?php //echo (isset($_SESSION['loggedin'])) ? $_SESSION['fName'] . " " . $_SESSION['lName'] . " | Current Live: " : "" ;?> <?php //echo (isset($_SESSION['loggedin']) && $_SESSION['livesUsed'] <= TOTAL_LIVES) ? (7 - $_SESSION['livesUsed']) : (7 - $_SESSION['livesUsed']) ;?></h5>-->
+        <h5 class="content__desc">Player: <?php echo (isset($_SESSION['loggedin'])) ? $_SESSION['fName'] . " " . $_SESSION['lName'] . " | Current Lives: " . ((TOTAL_LIVES + 1) - $_SESSION['livesUsed']) : "" ;?></h5>
+        <span class="valid-feedback"><?php echo (isset($_SESSION['loggedin']) && (in_array(($gameLevel), $_SESSION['gainedLevels'], true))) ? 'You Have Already Won This Level (Any mistake will not decrease the number of lives)' : '';?></span>
         <p class="content__desc">Please <?php echo $instructions; ?> (from a to z).</p>
         <p class="content__desc">Use ',' between each letter (Example: a,b,c,d,e,f).</p>
         </article>
