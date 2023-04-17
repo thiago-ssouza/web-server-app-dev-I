@@ -2,7 +2,7 @@
 <!-- 
 Ronald Mercado H.
 Web Server Applications
-21 March 2023
+10 April 2023
 LaSalle College
 Web Server Project - Registration Form
 -->
@@ -10,10 +10,7 @@ Web Server Project - Registration Form
 <?php
 require_once "functions.php";
 require_once "registerController.php";
-
-
 ?>
-
 <!-- -->
 
 <!DOCTYPE html>
@@ -33,15 +30,16 @@ require_once "registerController.php";
 <?php require_once "navBar.php"; ?>
     <div class="content p-5">
         <h2 class="content__heading">Sign Up</h2>
-        <?php
-        if (isset($_SESSION['mensaje'])) {
-            echo '<div class="alert alert-danger">' . $_SESSION['mensaje'] . "</div>";
-            unset($_SESSION['mensaje']);
-        }
-        ?>
+        
         <p  class="content__desc"> Please fill this form to create an account.</p>
         
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post"; >
+
+        <?php
+        if (isset($_SESSION['mensaje'])){
+            echo '<div class="alert alert-danger">' . $_SESSION['mensaje'] . "</div>";
+            unset($_SESSION['mensaje']);}
+        ?>        
 
             <div class="form-group">
                 <label  class="content__desc">Username</label>

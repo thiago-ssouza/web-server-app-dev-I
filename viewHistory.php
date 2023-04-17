@@ -20,7 +20,8 @@ Web Server Project - Game Level 1
 <body>    
     <?php require_once "functions.php";?>    
     <?php require_once "navBar.php";?>    
-    <table class="tabla-score">
+    <div class="history__container">
+    <table class="tabla-score" hidden>
         <thead>
             <tr>
                 <th>SCORE TIME</th>
@@ -35,7 +36,7 @@ Web Server Project - Game Level 1
             <?php require_once "viewHistoryController.php";?>            
         </tbody>
     </table>
-
+    </div>
     <?php require_once "footer.php";?>
 </body>
 </html>

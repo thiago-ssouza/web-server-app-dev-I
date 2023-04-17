@@ -27,7 +27,7 @@ require_once "loginController.php";
     ?>
     <!-- <div class="wrapper p-5 login_body"> -->
     <div class="content p-5">
-
+    <article class="content__container">
         <h2 class="content__heading">Login</h2>
         <p class="content__desc">Please fill in your credentials to login.</p>
 
@@ -59,6 +59,7 @@ require_once "loginController.php";
             }        
             ?>
         </form>
+    </article>
     </div>
 
     <?php

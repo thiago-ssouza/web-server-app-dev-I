@@ -2,20 +2,50 @@
 
 // Define variables and initialize with empty values
 
-
 // *****************************  Registration Functions **************************************
 
 $username_err = $password_err = $confirm_password_err = $firstname_err = $lastname_err = "";
+$counter = 0;
 
+// firstname validation
+function firstnameValidation($firstname){
+    global $firstname_err;
+    global $counter;
+
+    if(empty(trim($firstname))){        
+        $firstname_err = "Please enter a first name.";
+        $counter += 1;
+    }else{
+        return $firstname;
+    }
+}
+
+// lastname validation
+function lastnameValidation($lastname){
+    
+    global $lastname_err;
+    global $counter;
+
+    if(empty(trim($lastname))){        
+        $lastname_err = "Please enter a last name.";
+        $counter += 1;
+    }else{
+        return $lastname;
+    }
+    
+}
 // username validation
 function usernameValidation($username){
     global $username_err;
+    global $counter;
 
     if(empty($username)){        
         $username_err = "Please enter a username !";
+        $counter += 1;
     } 
     elseif(!preg_match('/^[a-zA-Z0-9_]+$/', trim($username))){
         $username_err = "Username can only contain letters, numbers, and underscores.";
+        $counter += 1;
     }else{
         return strtolower(trim($username));
     }
@@ -25,69 +55,48 @@ function usernameValidation($username){
 function passwordValidation($password){    
     
     global $password_err;
+    global $counter;
     // Validate password
     if(empty(trim($password))){
-        $password_err = "Please enter a password.";     
+        $password_err = "Please enter a password.";
+        $counter += 1;     
     } elseif(strlen(trim($password)) < 6){
         $password_err = "Password must have at least 6 characters.";
+        $counter += 1;
     }else{
         return $password;
-    }    
-    
+    } 
 }
 
 // Validate confirm password
 function confirmPasswordValidation($password , $confirm_password){
 
-    global $confirm_password_err;    
+    global $confirm_password_err;
+    global $counter;   
     
     if(empty(trim($confirm_password))){
         
-        $confirm_password_err = "Please confirm password.";     
+        $confirm_password_err = "Please confirm password.";
+        $counter += 1;     
     } 
     else if (($confirm_password != $password)) {
       
         $confirm_password_err = "Sorry, you entered 2 different passwords.";
+        $counter += 1;
                
     }else{
         return $confirm_password;
     }
-    
 }
+// validation no errors register
+function errorValidation() {
+    global $counter;
 
-// firstname validation
-function firstnameValidation($firstname){
-    global $firstname_err;
-
-    if(empty(trim($firstname))){        
-        $firstname_err = "Please enter a first name.";
-    }else{
-        return $firstname;
+    if ($counter > 0) {
+        return true; 
+    } else {
+        return false; 
     }
-    
-}
-
-// lastname validation
-function lastnameValidation($lastname){
-    
-    global $lastname_err;
-
-    if(empty(trim($lastname))){        
-        $lastname_err = "Please enter a last name.";
-    }else{
-        return $lastname;
-    }
-    
-}
-
-// validation no errors
-function errorValidation(){
-    
-    if(empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($firstname_err) && empty($lastname_err))
-        return true;
-    else
-        return false;
-   
 }
 
 // ************************* Login functions ****************************************
@@ -503,7 +512,6 @@ function checkPlayerCanAccessLevelOrRedirectPlayer() {
         exit;
     }
 }
-
 
 function getHistory(){
 
