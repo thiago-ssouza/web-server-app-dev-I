@@ -7,7 +7,6 @@ Thiago Soares De Souza
 <br/>
 <br/>
 Content:
-<br/>
 - PHP
 <br/>
 - Visual Studio Code
