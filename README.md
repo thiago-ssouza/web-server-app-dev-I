@@ -12,9 +12,9 @@ Content:
 <br/>
 - PHP
 <br/>
-- CSS
-<br/>
 - HTML5
+<br/>
+- CSS3
 <br/>
 - MVC - Model View Controller (Pattern)
 <br/>
