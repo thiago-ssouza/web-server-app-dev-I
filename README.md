@@ -8,9 +8,9 @@ Thiago Soares De Souza
 <br/>
 Content:
 <br/>
-- Visual Studio Code
-<br/>
 - PHP
+<br/>
+- Visual Studio Code
 <br/>
 - HTML5
 <br/>
